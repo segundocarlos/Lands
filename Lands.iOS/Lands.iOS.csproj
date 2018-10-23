@@ -157,4 +157,7 @@
       <Name>Lands</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\onu.png" />
+  </ItemGroup>
 </Project>
