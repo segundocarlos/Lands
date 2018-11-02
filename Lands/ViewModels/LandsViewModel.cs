@@ -56,6 +56,18 @@ namespace Lands.ViewModels
         #region Methods
         private async void LoadLands()
         {
+
+
+            var conexion = await this.apiService.CheckConnection();
+            if (!conexion.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", conexion.Message, "Accept");
+
+                await Application.Current.MainPage.Navigation.PopAsync();
+                return;
+            }
+
+
             var response = await this.apiService.GetList<Land>("http://restcountries.eu",
                                                                 "/rest",
                                                                 "/v2/all");
