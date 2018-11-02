@@ -7,15 +7,13 @@ namespace Lands.ViewModels
     using GalaSoft.MvvmLight.Command;
     using Xamarin.Forms;
 
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
 
-        #region Events
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
+       
 
         #region Atributos_a_refrescar_loginviewModel
-            private string email;
+           // private string email;
             private string password;
             private bool isrunning;
             private bool isenabled;
@@ -31,28 +29,21 @@ namespace Lands.ViewModels
         public string Password
         {
             get { return this.password;  }
-            set {
-                if (this.password != value)
-                {
-                    this.password = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Password)));
-                }
-
-            }
+            set { SetValue(ref this.password, value); }
         }
 
         public bool IsRunning
         {
-            get { return this.isrunning; }
-            set
-            {
-                if (this.isrunning != value)
-                {
-                    this.isrunning = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.IsRunning)));
-                }
 
-            }
+            get { return this.isrunning; }
+            set { SetValue(ref isrunning, value); }
+
+        }
+
+        public bool IsEnabled
+        {
+            get { return this.isenabled; }
+            set { SetValue(ref this.isenabled, value); }
         }
 
         public bool IsRemembered
@@ -60,19 +51,7 @@ namespace Lands.ViewModels
             get;
             set;
         }
-        public bool IsEnabled
-        {
-            get { return this.isenabled; }
-            set
-            {
-                if (this.isenabled != value)
-                {
-                    this.isenabled = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.IsEnabled)));
-                }
-
-            }
-        }
+      
 
         #endregion
 
