@@ -5,6 +5,7 @@ namespace Lands.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Models;
@@ -30,6 +31,8 @@ namespace Lands.ViewModels
 
         private ObservableCollection<Land> lands;
         private bool isRefreshing;
+        private string filtro;
+        private List<Land> landsList;
 
         #endregion
 
@@ -44,6 +47,12 @@ namespace Lands.ViewModels
         {
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
+        }
+
+        public string Filtro
+        {
+            get { return this.filtro; }
+            set { SetValue(ref this.filtro, value); }
         }
 
 
@@ -97,8 +106,8 @@ namespace Lands.ViewModels
 
             }
 
-            var list = (List<Land>)response.Result;
-            this.Lands = new ObservableCollection<Land>(list); // transformar a una lista observable para pintarla en la pantalla 
+            this.landsList = (List<Land>)response.Result;
+            this.Lands = new ObservableCollection<Land>(this.landsList); // transformar a una lista observable para pintarla en la pantalla 
 
             this.IsRefreshing = false;
         }
@@ -113,6 +122,23 @@ namespace Lands.ViewModels
         {
             get { return new RelayCommand(LoadLands); }
             
+        }
+
+        public ICommand BuscadorCommand
+        {
+            get { return new RelayCommand(Buscador); }
+        }
+
+        private void Buscador()
+        {
+            if (string.IsNullOrEmpty(Filtro))
+            {
+                this.Lands = new ObservableCollection<Land>(this.landsList);
+            }
+            else
+            {
+                this.Lands = new ObservableCollection<Land>(this.landsList.Where(l => l.Name.ToLower().Contains(this.Filtro.ToLower())));
+            }
         }
 
         #endregion
