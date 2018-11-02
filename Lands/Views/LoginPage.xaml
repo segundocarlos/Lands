@@ -93,6 +93,7 @@
                 VerticalOptions="CenterAndExpand">
                 <Button
                     Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                     HorizontalOptions="FillAndExpand"
                     HeightRequest="46"
                     BackgroundColor="Navy"
@@ -102,7 +103,7 @@
                      >
                 </Button>   
               <Button
-                    
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                     HorizontalOptions="FillAndExpand"
                     HeightRequest="46"
                     BackgroundColor="Purple"
