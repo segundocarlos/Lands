@@ -52,7 +52,11 @@ namespace Lands.ViewModels
         public string Filtro
         {
             get { return this.filtro; }
-            set { SetValue(ref this.filtro, value); }
+            set 
+            { 
+                SetValue(ref this.filtro, value);
+                this.Buscador();
+            }
         }
 
 
@@ -137,7 +141,8 @@ namespace Lands.ViewModels
             }
             else
             {
-                this.Lands = new ObservableCollection<Land>(this.landsList.Where(l => l.Name.ToLower().Contains(this.Filtro.ToLower())));
+                this.Lands = new ObservableCollection<Land>(this.landsList.Where(l => l.Name.ToLower().Contains(this.Filtro.ToLower()) ||
+                                                                                l.Capital.ToLower().Contains(this.Filtro.ToLower())));
             }
         }
 
