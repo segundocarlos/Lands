@@ -5,5 +5,19 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Land">
     <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding Land}">
+            <StackLayout
+                Padding="5">
+                <Label
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    Text="{Binding Land.Name}"
+                    TextColor="Black"
+                    HorizontalOptions="Center">
+                    
+                </Label>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
