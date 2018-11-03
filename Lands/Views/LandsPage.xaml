@@ -26,11 +26,17 @@
                 RefreshCommand="{Binding RefreshCommand}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell  >
                             
-                               
+                            <Frame
+                                HasShadow="false">
+                                
+                                 <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectLandCommand}"/>
+                                 </Frame.GestureRecognizers>
+                                
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -56,6 +62,9 @@
                                         Source="ic_chevron_right">
                                     </Image>
                                 </Grid>
+                            </Frame>
+                            
+                                
                            
                         </ViewCell>
                     </DataTemplate>

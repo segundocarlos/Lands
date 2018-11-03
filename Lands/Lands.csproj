@@ -22,4 +22,7 @@
     <Folder Include="Infraestructure\" />
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\EmptyCSharpFile.cs" />
+  </ItemGroup>
 </Project>

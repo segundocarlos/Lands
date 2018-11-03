@@ -29,7 +29,7 @@ namespace Lands.ViewModels
         //private List<Land> lands;
         // no debe ser una lista sencilla debe ser una lista que se va a pintar  y refrescar, por eso debe ser una observable collections
 
-        private ObservableCollection<Land> lands;
+        private ObservableCollection<LandItemViewModel> lands;
         private bool isRefreshing;
         private string filtro;
         private List<Land> landsList;
@@ -37,7 +37,7 @@ namespace Lands.ViewModels
         #endregion
 
         #region Properties
-        public ObservableCollection<Land> Lands
+        public ObservableCollection<LandItemViewModel> Lands
         {
             get { return this.lands; }
             set { SetValue(ref this.lands, value); }
@@ -111,14 +111,53 @@ namespace Lands.ViewModels
             }
 
             this.landsList = (List<Land>)response.Result;
-            this.Lands = new ObservableCollection<Land>(this.landsList); // transformar a una lista observable para pintarla en la pantalla 
+            this.Lands = new ObservableCollection<LandItemViewModel>(this.ToLandItemViewModel()); // transformar a una lista observable para pintarla en la pantalla 
 
             this.IsRefreshing = false;
         }
 
 
 
+
+
         #endregion
+
+
+        #region Methods
+        private IEnumerable<LandItemViewModel> ToLandItemViewModel()
+        {
+            return this.landsList.Select(l => new LandItemViewModel
+            {
+                Alpha2Code = l.Alpha2Code,
+                Alpha3Code = l.Alpha3Code,
+                AltSpellings = l.AltSpellings,
+                Area = l.Area,
+                Borders = l.Borders,
+                CallingCodes = l.CallingCodes,
+                Capital = l.Capital,
+                Cioc = l.Cioc,
+                Currencies = l.Currencies,
+                Demonym = l.Demonym,
+                Flag = l.Flag,
+                Gini = l.Gini,
+                Languages = l.Languages,
+                Latlng = l.Latlng,
+                Name = l.Name,
+                NativeName = l.NativeName,
+                NumericCode = l.NumericCode,
+                Population = l.Population,
+                Region = l.Region,
+                RegionalBlocs = l.RegionalBlocs,
+                Subregion = l.Subregion,
+                Timezones = l.Timezones,
+                TopLevelDomain = l.TopLevelDomain,
+                Translations = l.Translations,
+            });
+
+        }
+
+        #endregion
+
 
         #region command
 
@@ -137,11 +176,11 @@ namespace Lands.ViewModels
         {
             if (string.IsNullOrEmpty(Filtro))
             {
-                this.Lands = new ObservableCollection<Land>(this.landsList);
+                this.Lands = new ObservableCollection<LandItemViewModel>(this.ToLandItemViewModel());
             }
             else
             {
-                this.Lands = new ObservableCollection<Land>(this.landsList.Where(l => l.Name.ToLower().Contains(this.Filtro.ToLower()) ||
+                this.Lands = new ObservableCollection<LandItemViewModel>(this.ToLandItemViewModel().Where(l => l.Name.ToLower().Contains(this.Filtro.ToLower()) ||
                                                                                 l.Capital.ToLower().Contains(this.Filtro.ToLower())));
             }
         }
