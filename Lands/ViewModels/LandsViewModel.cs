@@ -32,7 +32,7 @@ namespace Lands.ViewModels
         private ObservableCollection<LandItemViewModel> lands;
         private bool isRefreshing;
         private string filtro;
-        private List<Land> landsList;
+        //private List<Land> landsList;
 
         #endregion
 
@@ -110,7 +110,7 @@ namespace Lands.ViewModels
 
             }
 
-            this.landsList = (List<Land>)response.Result;
+            MainViewModel.ObtenerInstancia().LandsList = (List<Land>)response.Result;
             this.Lands = new ObservableCollection<LandItemViewModel>(this.ToLandItemViewModel()); // transformar a una lista observable para pintarla en la pantalla 
 
             this.IsRefreshing = false;
@@ -126,7 +126,7 @@ namespace Lands.ViewModels
         #region Methods
         private IEnumerable<LandItemViewModel> ToLandItemViewModel()
         {
-            return this.landsList.Select(l => new LandItemViewModel
+            return MainViewModel.ObtenerInstancia().LandsList.Select(l => new LandItemViewModel
             {
                 Alpha2Code = l.Alpha2Code,
                 Alpha3Code = l.Alpha3Code,

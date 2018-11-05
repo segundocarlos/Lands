@@ -1,9 +1,21 @@
 ﻿
 namespace Lands.ViewModels
 {
+    using System.Collections.Generic;
+    using Models;
+
     public class MainViewModel
     {
 
+
+        #region properties
+
+        #endregion
+        public List<Land> LandsList
+        {
+            get;
+            set;
+        }
         #region ViewModels
 
         public LoginViewModel Login
@@ -35,7 +47,6 @@ namespace Lands.ViewModels
         }
 
         #endregion
-
 
         #region Singleton
         // para que no se me creen muchas instancias 
